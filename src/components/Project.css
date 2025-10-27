@@ -1,0 +1,107 @@
+/* src/components/Project.css */
+
+.section-title {
+  text-align: left; /* Adjust if needed, but the example image shows it left-aligned */
+}
+
+.section-subtitle {
+  text-align: left;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.project-card {
+  height: 350px; /* Fixed height for consistent cards */
+  border-radius: 15px;
+  /* Gradients are applied inline in JS, so this is a fallback or for default */
+  background: var(--bg-card); 
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  color: #fff; /* Text color for gradient cards */
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.15); /* Slightly darker overlay for text readability */
+    z-index: 1;
+}
+
+.project-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  z-index: 2; /* Bring content above overlay */
+}
+
+.project-tag {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.view-project-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 2; /* Bring content above overlay */
+}
+
+.view-project-btn:hover {
+  color: #fff;
+}
+
+.card-content {
+  flex-grow: 1; /* Pushes content to the bottom */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Aligns content to bottom */
+  position: relative;
+  z-index: 2; /* Bring content above overlay */
+}
+
+.card-content h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.project-technologies-brief {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* No need for slick-specific dots/arrows anymore */

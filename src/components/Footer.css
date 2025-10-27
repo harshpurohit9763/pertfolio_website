@@ -1,0 +1,38 @@
+/* src/components/Footer.css */
+.footer {
+  background-color: var(--bg-secondary);
+  padding: 3rem 0 2rem 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-left h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.footer-left p,
+.footer-right p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+.footer-bottom {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 2rem;
+}

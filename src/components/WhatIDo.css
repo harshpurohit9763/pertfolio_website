@@ -1,0 +1,41 @@
+/* src/components/WhatIDo.css */
+.whatido-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  background-color: var(--bg-card);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gradient-start);
+}
+
+.service-icon {
+  font-size: 2rem;
+  color: var(--gradient-end);
+  margin-bottom: 1rem;
+}
+
+.service-title {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.service-list {
+  list-style-type: '✓  '; /* Custom bullet */
+  padding-left: 1.5rem;
+}
+
+.service-list li {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}

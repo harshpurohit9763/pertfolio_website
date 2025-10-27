@@ -1,0 +1,57 @@
+/* src/components/LiveApps.css */
+.live-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.app-card {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.app-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gradient-end);
+  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.1);
+}
+
+.app-card-icon {
+  font-size: 2.5rem;
+  color: var(--gradient-end);
+  flex-shrink: 0;
+}
+
+.app-card-content {
+  flex-grow: 1;
+}
+
+.app-card-content h3 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.app-card-content p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.app-card-view {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+.app-card:hover .app-card-view {
+  color: var(--gradient-end);
+}

@@ -1,0 +1,132 @@
+/* src/components/Contact.css */
+
+/* --- Keyframes for Floating Animation --- */
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px); /* Adjust float height */
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* --- Styles for Floating Scroll Look --- */
+.floating-scroll-header {
+  text-align: center;
+  max-width: 750px; /* Adjust width as needed */
+  margin: 0 auto 5rem auto; /* Center and add more space below */
+  padding: 2.5rem 3rem;
+  border-radius: 8px; /* Slightly rounded corners */
+
+  /* Parchment/Scroll background */
+  background-color: #f5f5dc; /* Beige color like parchment */
+  border: 1px solid #d2b48c; /* Tan border */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Softer shadow */
+
+  /* Apply the animation */
+  animation: floatAnimation 6s ease-in-out infinite; /* Adjust duration/timing */
+
+  /* Base text color for this section */
+  color: #5a463a; /* Darker brown text */
+}
+
+.floating-scroll-header .section-title {
+  font-size: 2.8rem; /* Adjusted size */
+  line-height: 1.3;
+  color: #5a463a; /* Match parent text color */
+  margin-bottom: 1.5rem;
+  font-family: inherit; /* Use the site's default font */
+  text-shadow: none; /* Remove any text shadow */
+  font-weight: 700; /* Ensure title is bold */
+}
+
+/* Keep the gradient on the second line, using default font */
+.floating-scroll-header .gradient-text {
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-family: inherit; /* Use the site's default font */
+}
+
+/* Quote Subtitle - Use standard font */
+.floating-scroll-header .quote-subtitle {
+  font-style: italic; /* Italic for the quote itself */
+  font-size: 1.15rem;
+  color: #7d6b5f; /* Slightly lighter brown */
+  line-height: 1.6;
+  font-family: inherit; /* Use the site's default font */
+  margin-bottom: 1rem; /* Space before attribution */
+  /* Remove ancient font specific styles */
+  /* letter-spacing: 1px; */
+}
+
+/* Apply Ancient Font ONLY to Attribution */
+.floating-scroll-header .quote-attribution {
+  display: block;
+  font-style: normal;
+  font-weight: normal; /* Uncial Antiqua is already bold */
+  color: #5a463a; /* Match title color */
+  font-size: 1.2rem; /* Make attribution slightly larger */
+  font-family: 'Uncial Antiqua', cursive; /* Apply the ancient font HERE */
+  text-align: right;
+  margin-top: 1rem;
+  letter-spacing: 1px; /* Add slight spacing for this font */
+}
+/* --- END Floating Scroll Styles --- */
+
+
+/* --- Contact Links Grid Styles (Keep these) --- */
+.contact-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 4rem; /* Ensure sufficient space below header */
+}
+
+.contact-card {
+  background-color: var(--bg-card); /* Use your theme variable */
+  border: 1px solid var(--border-color); /* Use your theme variable */
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gradient-end); /* Use your theme variable */
+  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.1); /* Match gradient end color */
+}
+
+.contact-icon {
+  font-size: 2.5rem;
+  color: var(--gradient-end); /* Use your theme variable */
+  margin-bottom: 1rem;
+}
+
+.contact-card h3 {
+  font-size: 1.25rem;
+  color: var(--text-primary); /* Use your theme variable */
+  margin-bottom: 0.5rem;
+}
+
+.contact-card p {
+  font-size: 1rem;
+  color: var(--text-secondary); /* Use your theme variable */
+  margin-bottom: 1.5rem;
+  word-break: break-all;
+}
+
+.contact-card span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary); /* Use your theme variable */
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
