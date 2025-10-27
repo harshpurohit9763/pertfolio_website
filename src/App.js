@@ -5,16 +5,18 @@ import './index.css'; // Your new global styles
 // Import your components
 import Navbar from './components/Navbar';
 import Profile from './components/Profile';
-import WhatIDo from './components/WhatIDo'; // Replaces Experience/Skills
+import WhatIDo from './components/WhatIDo';
+import Experience from './components/Experience';
 import Projects from './components/Project';
-import Contact from './components/Contact'; // New component
-import Footer from './components/Footer';   // New component
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 import LiveApps from './components/LiveApps';
 
 function App() {
   // Create refs for each section
   const profileRef = useRef(null);
   const whatidoRef = useRef(null);
+  const experienceRef = useRef(null);
   const projectsRef = useRef(null);
   const liveAppsRef = useRef(null);
   const contactRef = useRef(null);
@@ -30,6 +32,7 @@ function App() {
   const refs = {
     profileRef,
     whatidoRef,
+    experienceRef,
     projectsRef,
     liveAppsRef,
     contactRef,
@@ -47,7 +50,9 @@ function App() {
         <section ref={whatidoRef} id="about" className="section container">
           <WhatIDo />
         </section>
-
+        <section ref={experienceRef} id="experience" className="section container">
+          <Experience />
+        </section>
         <section ref={projectsRef} id="projects" className="section container">
           <Projects />
         </section>
