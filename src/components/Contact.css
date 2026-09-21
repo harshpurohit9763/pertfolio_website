@@ -75,8 +75,5 @@
   align-self: flex-start;
 }
 
-@media (max-width: 600px) {
-  .contact-form-row {
-    grid-template-columns: 1fr;
-  }
-}
+/* No mobile breakpoint here on purpose — below 768px App.js renders the
+   ContactMobile view instead (see src/components/mobile). */

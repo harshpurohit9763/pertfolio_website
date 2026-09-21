@@ -1,8 +1,10 @@
 // src/App.js
 import React, { useRef, useEffect } from 'react';
 import './index.css'; // Your new global styles
+import useIsMobile from './hooks/useIsMobile';
+import mobileSection from './components/mobile/MobileSection.module.css';
 
-// Import your components
+// Desktop views
 import Navbar from './components/Navbar';
 import Profile from './components/Profile';
 import WhatIDo from './components/WhatIDo';
@@ -12,7 +14,33 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import LiveApps from './components/LiveApps';
 
+// Mobile views — separate component tree, not CSS breakpoints, per section
+import NavbarMobile from './components/mobile/NavbarMobile';
+import ProfileMobile from './components/mobile/ProfileMobile';
+import AboutMobile from './components/mobile/AboutMobile';
+import ExperienceMobile from './components/mobile/ExperienceMobile';
+import ProjectMobile from './components/mobile/ProjectMobile';
+import LiveAppsMobile from './components/mobile/LiveAppsMobile';
+import ContactMobile from './components/mobile/ContactMobile';
+import FooterMobile from './components/mobile/FooterMobile';
+
+// Picks the desktop or mobile component for one section and wraps it in the
+// matching section shell (the mobile shell uses tighter, phone-sized padding).
+function Section({ id, sectionRef, isMobile, Desktop, Mobile }) {
+  return (
+    <section
+      ref={sectionRef}
+      id={id}
+      className={isMobile ? `${mobileSection.wrap} reveal` : 'section container reveal'}
+    >
+      {isMobile ? <Mobile /> : <Desktop />}
+    </section>
+  );
+}
+
 function App() {
+  const isMobile = useIsMobile();
+
   // Create refs for each section
   const profileRef = useRef(null);
   const whatidoRef = useRef(null);
@@ -54,37 +82,29 @@ function App() {
     );
     targets.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="App">
-      <Navbar scrollToSection={scrollToSection} refs={refs} />
+      {isMobile ? (
+        <NavbarMobile scrollToSection={scrollToSection} refs={refs} />
+      ) : (
+        <Navbar scrollToSection={scrollToSection} refs={refs} />
+      )}
       <main>
-        {/* We wrap each component in a <section> tag for styling and scrolling */}
         <section ref={profileRef} id="home">
-          <Profile />
+          {isMobile ? <ProfileMobile /> : <Profile />}
         </section>
 
-        <section ref={whatidoRef} id="about" className="section container reveal">
-          <WhatIDo />
-        </section>
-        <section ref={experienceRef} id="experience" className="section container reveal">
-          <Experience />
-        </section>
-        <section ref={projectsRef} id="projects" className="section container reveal">
-          <Projects />
-        </section>
-        <section ref={liveAppsRef} id="live-apps" className="section container reveal">
-          <LiveApps />
-        </section>
-        <section ref={contactRef} id="contact" className="section container reveal">
-          <Contact />
-        </section>
+        <Section id="about" sectionRef={whatidoRef} isMobile={isMobile} Desktop={WhatIDo} Mobile={AboutMobile} />
+        <Section id="experience" sectionRef={experienceRef} isMobile={isMobile} Desktop={Experience} Mobile={ExperienceMobile} />
+        <Section id="projects" sectionRef={projectsRef} isMobile={isMobile} Desktop={Projects} Mobile={ProjectMobile} />
+        <Section id="live-apps" sectionRef={liveAppsRef} isMobile={isMobile} Desktop={LiveApps} Mobile={LiveAppsMobile} />
+        <Section id="contact" sectionRef={contactRef} isMobile={isMobile} Desktop={Contact} Mobile={ContactMobile} />
       </main>
-      <Footer />
+      {isMobile ? <FooterMobile /> : <Footer />}
     </div>
   );
 }
 
 export default App;
-// 

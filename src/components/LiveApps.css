@@ -168,30 +168,5 @@
   transform: translateY(-2px);
 }
 
-@media (max-width: 600px) {
-  .liveapps-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
-  }
-  .liveapps-board-head {
-    display: none;
-  }
-  .app-row {
-    grid-template-columns: 1fr auto;
-    grid-template-areas:
-      'title links'
-      'status links';
-    row-gap: 0.5rem;
-  }
-  .app-row-title {
-    grid-area: title;
-  }
-  .app-row-status {
-    grid-area: status;
-  }
-  .app-row-links {
-    grid-area: links;
-    align-self: center;
-  }
-}
+/* No mobile breakpoint here on purpose — below 768px App.js renders the
+   LiveAppsMobile view instead (see src/components/mobile). */

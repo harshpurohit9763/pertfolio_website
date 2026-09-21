@@ -1,0 +1,171 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba(10, 11, 9, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.1s linear;
+}
+
+.bar {
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+}
+
+.logo {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.logoMark {
+  color: var(--accent);
+  margin-right: 1px;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.menuSheet {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  background-color: rgba(10, 11, 9, 0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  transition: max-height 0.35s ease, opacity 0.3s ease;
+}
+
+.menuSheet.open {
+  max-height: 480px;
+  opacity: 1;
+}
+
+.menuList {
+  padding: 0.5rem 5% 0 5%;
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.95rem 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.menuIndex {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.menuLink.active {
+  color: var(--accent);
+}
+
+.menuLink.active .menuIndex {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.resumeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 1.1rem 5% 1.4rem 5%;
+  padding: 0.85rem;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+}
+
+.contactSheet {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 5%;
+  background-color: rgba(10, 11, 9, 0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  transition: max-height 0.35s ease, opacity 0.3s ease, padding 0.35s ease;
+}
+
+.contactSheet.open {
+  max-height: 400px;
+  opacity: 1;
+  padding: 1.4rem 5% 1.6rem 5%;
+}
+
+.contactLabel {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.9rem;
+}
+
+.contactLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.contactPill {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.contactPill svg {
+  color: var(--accent);
+  font-size: 1rem;
+  flex-shrink: 0;
+}

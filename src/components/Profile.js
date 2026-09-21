@@ -1,43 +1,14 @@
 // src/components/Profile.js
-import React, { useEffect, useState } from 'react';
+// Desktop-only view — App.js renders ProfileMobile below the mobile breakpoint instead.
+import React from 'react';
 import { FaArrowDown } from 'react-icons/fa';
-// Use your local image from the /public folder
-import profileImage from '../assets/profile.jpeg';
+import profileImage from '../assets/profile.png';
 import './Profile.css';
-
-const ROLES = ['Flutter Developer', 'Backend Engineer', 'Problem Solver', 'Full-Stack Builder'];
-const TYPE_SPEED = 65;
-const DELETE_SPEED = 35;
-const HOLD_TIME = 1400;
+import { ROLES } from '../data/profile';
+import useTypewriter from '../hooks/useTypewriter';
 
 function Profile() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [typedText, setTypedText] = useState('');
-  const [phase, setPhase] = useState('typing'); // 'typing' | 'holding' | 'deleting'
-
-  useEffect(() => {
-    const current = ROLES[roleIndex];
-    let timeoutId;
-
-    if (phase === 'typing') {
-      if (typedText.length < current.length) {
-        timeoutId = setTimeout(() => setTypedText(current.slice(0, typedText.length + 1)), TYPE_SPEED);
-      } else {
-        timeoutId = setTimeout(() => setPhase('holding'), HOLD_TIME);
-      }
-    } else if (phase === 'holding') {
-      timeoutId = setTimeout(() => setPhase('deleting'), 400);
-    } else if (phase === 'deleting') {
-      if (typedText.length > 0) {
-        timeoutId = setTimeout(() => setTypedText(current.slice(0, typedText.length - 1)), DELETE_SPEED);
-      } else {
-        setRoleIndex((i) => (i + 1) % ROLES.length);
-        setPhase('typing');
-      }
-    }
-
-    return () => clearTimeout(timeoutId);
-  }, [typedText, phase, roleIndex]);
+  const typedText = useTypewriter(ROLES);
 
   return (
     <div className="profile-section container">

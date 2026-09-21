@@ -1,0 +1,132 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(6, 5, 9, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-end;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.25s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sheet {
+  position: relative;
+  width: 100%;
+  max-height: 88svh;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  border-radius: 18px 18px 0 0;
+  padding: 1rem 1.4rem 1.4rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(30px);
+  animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--border-color);
+  margin: 0 auto 0.9rem auto;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0.9rem;
+  right: 1.1rem;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  z-index: 2;
+}
+
+.scroll {
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+  padding-right: 2rem;
+}
+
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 20px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+
+.technologies {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.technologies strong {
+  color: var(--text-primary);
+}
+
+.descHeading {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 0.7rem;
+}
+
+.descList {
+  list-style: none;
+  margin-bottom: 1.2rem;
+}
+
+.descList li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.55rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.descList li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  font-family: var(--mono);
+  color: var(--accent);
+}
+
+.viewImagesBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: var(--accent);
+  color: var(--text-dark);
+  padding: 0.85rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}

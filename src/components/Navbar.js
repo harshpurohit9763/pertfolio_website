@@ -1,14 +1,10 @@
 // src/components/Navbar.js
+// Desktop-only view — App.js renders NavbarMobile below the mobile breakpoint instead.
 import React, { useEffect, useState, useRef } from 'react';
-import { FaFilePdf, FaEnvelope, FaPhone, FaLinkedin, FaGithub } from 'react-icons/fa';
+import { FaFilePdf } from 'react-icons/fa';
 import './Navbar.css';
-
-const CONTACT_LINKS = [
-  { icon: <FaEnvelope />, label: 'Harshpurohit1706@gmail.com', href: 'mailto:Harshpurohit1706@gmail.com' },
-  { icon: <FaPhone />, label: '+91 9763745705', href: 'tel:+919763745705' },
-  { icon: <FaLinkedin />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/harshpurohit250119/', external: true },
-  { icon: <FaGithub />, label: 'GitHub', href: 'https://github.com/harshpurohit9763', external: true },
-];
+import { CONTACT_LINKS } from '../data/contact';
+import { NAV_ITEMS } from '../data/navigation';
 
 function Navbar({ scrollToSection, refs }) {
   const [active, setActive] = useState('home');
@@ -17,14 +13,7 @@ function Navbar({ scrollToSection, refs }) {
   const observer = useRef(null);
   const dropdownRef = useRef(null);
 
-  const sections = [
-    { id: 'home', label: 'Home', ref: refs.profileRef },
-    { id: 'about', label: 'About', ref: refs.whatidoRef },
-    { id: 'experience', label: 'Experience', ref: refs.experienceRef },
-    { id: 'projects', label: 'Projects', ref: refs.projectsRef },
-    { id: 'live-apps', label: 'Live Apps', ref: refs.liveAppsRef },
-    { id: 'contact', label: 'Contact', ref: refs.contactRef },
-  ];
+  const sections = NAV_ITEMS.map((item) => ({ ...item, ref: refs[item.refKey] }));
 
   useEffect(() => {
     observer.current = new IntersectionObserver(

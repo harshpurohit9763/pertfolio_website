@@ -192,26 +192,5 @@
   transform: translateY(-2px);
 }
 
-@media (max-width: 768px) {
-  .nav-menu {
-    gap: 0.9rem;
-  }
-  .nav-link {
-    font-size: 0.85rem;
-  }
-  .nav-link-index {
-    display: none;
-  }
-  .nav-download-btn span {
-    display: none;
-  }
-  .contact-dropdown.open {
-    max-height: 320px;
-  }
-  .contact-pill span {
-    max-width: 46vw;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
+/* No mobile breakpoint here on purpose — below 768px App.js swaps this
+   component out for NavbarMobile entirely (see src/components/mobile). */

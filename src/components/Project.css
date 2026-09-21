@@ -163,15 +163,5 @@
   transform: rotate(45deg);
 }
 
-@media (max-width: 640px) {
-  .project-row {
-    grid-template-columns: 1fr auto;
-    row-gap: 0.75rem;
-  }
-  .project-row-index {
-    display: none;
-  }
-  .project-tag {
-    display: none;
-  }
-}
+/* No mobile breakpoint here on purpose — below 768px App.js renders the
+   ProjectMobile view instead (see src/components/mobile). */

@@ -75,9 +75,5 @@
   font-weight: 500;
 }
 
-@media (max-width: 600px) {
-  .experience-row {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-}
+/* No mobile breakpoint here on purpose — below 768px App.js renders the
+   ExperienceMobile view instead (see src/components/mobile). */

@@ -67,40 +67,43 @@
 }
 
 .profile-portrait {
+  position: relative;
   display: flex;
   justify-content: center;
 }
 
-.profile-portrait-frame {
-  position: relative;
-  width: 260px;
-  height: 260px;
-}
-
-.profile-portrait-frame::before {
+/* Ambient glow standing in for the frame — the cutout now sits straight on
+   the page instead of inside a bordered box. */
+.profile-portrait::before {
   content: '';
   position: absolute;
-  inset: 0;
-  border: 1px solid var(--accent);
-  border-radius: 12px;
-  transform: translate(14px, 14px);
+  left: 50%;
+  top: 50%;
+  width: 320px;
+  height: 320px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  filter: blur(70px);
+  opacity: 0.3;
   z-index: 0;
+  pointer-events: none;
+}
+
+.profile-portrait-frame {
+  position: relative;
+  z-index: 1;
+  width: 300px;
 }
 
 .profile-image {
-  position: relative;
-  z-index: 1;
-  width: 260px;
-  height: 260px;
-  border-radius: 12px;
-  object-fit: cover;
-  border: 1px solid var(--border-color);
-  filter: grayscale(35%);
-  transition: filter 0.4s ease;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.5s ease;
 }
 
 .profile-portrait-frame:hover .profile-image {
-  filter: grayscale(0%);
+  transform: scale(1.03);
 }
 
 .profile-scroll-cue {
@@ -145,12 +148,7 @@
     margin-right: auto;
   }
   .profile-portrait-frame {
-    width: 180px;
-    height: 180px;
-  }
-  .profile-image {
-    width: 180px;
-    height: 180px;
+    width: 220px;
   }
   .profile-headline {
     font-size: 2.3rem;

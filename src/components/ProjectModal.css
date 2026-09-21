@@ -188,21 +188,5 @@
 }
 
 
-/* Responsive adjustments for modal */
-@media (max-width: 600px) {
-  .modal-content {
-    padding: 1.5rem;
-  }
-  .modal-title {
-    font-size: 1.8rem;
-  }
-  .modal-close-btn {
-    font-size: 1.5rem;
-    top: 1rem;
-    right: 1rem;
-  }
-  .modal-view-images-btn {
-    font-size: 0.9rem;
-    padding: 0.6rem 1.2rem;
-  }
-}
+/* No mobile breakpoint here on purpose — below 768px App.js renders
+   ProjectModalMobile instead (see src/components/mobile). */
