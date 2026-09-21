@@ -1,69 +1,83 @@
 /* src/components/Experience.css */
 
-/* --- NEW HEADER STYLES --- */
 .experience-header-container {
   display: flex;
-  justify-content: space-between; /* Pushes title and total apart */
-  align-items: baseline; /* Aligns text nicely */
-  margin-bottom: 1rem; /* Adjust spacing as needed, replaces title margin */
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
 }
 
-/* Ensure section title doesn't have default bottom margin interfering */
 .experience-header-container .section-title {
   margin-bottom: 0;
 }
 
 .total-experience {
-  font-size: 1.1rem; /* Slightly larger */
-  font-weight: 600; /* Bolder */
-  /* Apply the gradient text style */
-  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent);
   white-space: nowrap;
   margin-left: 1rem;
-  padding-bottom: 2px; /* Add a small padding for baseline alignment if needed */
+  padding-bottom: 2px;
 }
-/* --- END NEW HEADER STYLES --- */
 
+.experience-timeline {
+  margin-top: 3rem;
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--border-color);
+}
 
-.experience-grid {
+.experience-row {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: 160px 1fr;
   gap: 1.5rem;
-  margin-top: 3rem; /* Keep margin from subtitle */
+  align-items: baseline;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  transition: padding-left 0.25s ease;
 }
 
-.experience-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 2rem;
-  transition: all 0.3s ease;
+.experience-row:last-child {
+  border-bottom: none;
 }
 
-.experience-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--gradient-start);
-  box-shadow: 0 4px 15px rgba(127, 0, 255, 0.1);
+.experience-row:hover {
+  padding-left: 0.5rem;
 }
 
-.experience-card h3 {
-  font-size: 1.4rem;
+.experience-marker {
+  position: absolute;
+  left: -1.9rem;
+  top: 2rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 2px solid var(--accent);
+}
+
+.experience-duration {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.experience-role-block h3 {
+  font-size: 1.3rem;
   color: var(--text-primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .experience-role {
   font-size: 1rem;
-  color: var(--gradient-end);
+  color: var(--accent);
   font-weight: 500;
-  margin-bottom: 0.75rem;
 }
 
-.experience-duration {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+@media (max-width: 600px) {
+  .experience-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
 }

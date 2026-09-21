@@ -1,17 +1,21 @@
 /* src/index.css */
-/* @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');
 :root {
-  --bg-primary: #121212;
-  --bg-secondary: #1a1a1a;
-  --bg-card: #222222;
-  --text-primary: #e0e0e0;
-  --text-secondary: #a0a0a0;
-  --text-dark: #121212;
-  --gradient-start: #7f00ff;
-  --gradient-end: #00aaff;
-  --border-color: #333;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --bg-primary: #0c0a10;
+  --bg-secondary: #14111c;
+  --bg-card: #181420;
+  --text-primary: #f1eef7;
+  --text-secondary: #948da3;
+  /* text color for anything sitting on top of a filled --accent surface */
+  --text-dark: #ffffff;
+  --accent: #8e30c9;
+  --accent-dim: #5c1f83;
+  --accent-rgb: 142, 48, 201;
+  --gradient-start: #8e30c9;
+  --gradient-end: #8e30c9;
+  --border-color: #2a2333;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+  --sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 * {
@@ -25,11 +29,42 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--sans);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
-  
+  position: relative;
+}
+
+/* subtle grain so flat dark sections don't look like a template */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--text-dark);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-dim);
 }
 
 a {
@@ -38,8 +73,10 @@ a {
   transition: color 0.3s ease;
 }
 
-a:hover {
-  color: var(--gradient-end);
+/* :not(.btn) keeps this from overriding any filled/accent-background button's own
+   hover color — that's what made "Contact Me" text vanish (lime text on lime bg). */
+a:hover:not(.btn) {
+  color: var(--accent);
 }
 
 ul {
@@ -51,6 +88,11 @@ img {
   display: block;
 }
 
+code,
+.mono {
+  font-family: var(--mono);
+}
+
 /* Re-usable Container */
 .container {
   width: 90%;
@@ -58,13 +100,22 @@ img {
   margin: 0 auto;
 }
 
-/* Gradient Text */
+/* Accent text — a flat, deliberate color beats a gradient-clip on every heading */
 .gradient-text {
-  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-fill-color: transparent;
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Base Section Styling */
@@ -73,10 +124,31 @@ img {
   border-bottom: 1px solid var(--border-color);
 }
 
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.section-eyebrow::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
 .section-title {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  letter-spacing: -0.02em;
 }
 
 .section-subtitle {
@@ -88,23 +160,26 @@ img {
 
 /* Re-usable Button */
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  border-radius: 8px;
+  border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .btn-primary {
-  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-  color: #fff;
-  border: none;
+  background: var(--accent);
+  color: var(--text-dark);
+  border: 1px solid var(--accent);
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
-  box-shadow: 0 0 15px rgba(127, 0, 255, 0.5);
+  color: var(--text-dark);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-dim);
 }
 
 .btn-secondary {
@@ -114,6 +189,19 @@ img {
 }
 
 .btn-secondary:hover {
-  background-color: var(--bg-card);
-  border-color: var(--gradient-end);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--border-color);
+  border-color: var(--text-primary);
+}
+
+/* Scroll-reveal utility — applied via JS (App.js) IntersectionObserver */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }

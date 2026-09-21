@@ -1,5 +1,5 @@
 // src/App.js
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './index.css'; // Your new global styles
 
 // Import your components
@@ -38,6 +38,24 @@ function App() {
     contactRef,
   };
 
+  // Fade sections in as they enter the viewport instead of dumping everything on screen at once.
+  useEffect(() => {
+    const targets = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+    );
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="App">
       <Navbar scrollToSection={scrollToSection} refs={refs} />
@@ -47,19 +65,19 @@ function App() {
           <Profile />
         </section>
 
-        <section ref={whatidoRef} id="about" className="section container">
+        <section ref={whatidoRef} id="about" className="section container reveal">
           <WhatIDo />
         </section>
-        <section ref={experienceRef} id="experience" className="section container">
+        <section ref={experienceRef} id="experience" className="section container reveal">
           <Experience />
         </section>
-        <section ref={projectsRef} id="projects" className="section container">
+        <section ref={projectsRef} id="projects" className="section container reveal">
           <Projects />
         </section>
-        <section ref={liveAppsRef} id="live-apps" className="section container">
+        <section ref={liveAppsRef} id="live-apps" className="section container reveal">
           <LiveApps />
         </section>
-        <section ref={contactRef} id="contact" className="section container">
+        <section ref={contactRef} id="contact" className="section container reveal">
           <Contact />
         </section>
       </main>

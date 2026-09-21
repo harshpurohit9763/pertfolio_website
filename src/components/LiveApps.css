@@ -1,57 +1,197 @@
 /* src/components/LiveApps.css */
-.live-apps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 3rem;
-}
 
-.app-card {
-  background-color: var(--bg-card);
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  padding: 1.5rem 2rem;
+.liveapps-header {
   display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.liveapps-header .section-title {
+  margin-bottom: 0;
+}
+
+.liveapps-count {
+  font-size: 0.85rem;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.liveapps-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 2rem 0 1.5rem 0;
+}
+
+.liveapps-filter {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.liveapps-filter:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+.liveapps-filter.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--text-dark);
+}
+
+.liveapps-board {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-card);
+  position: relative;
+}
+
+.liveapps-board::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: scan 5s linear infinite;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.liveapps-board-head {
+  display: grid;
+  grid-template-columns: 1fr 100px 140px;
+  gap: 1rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.liveapps-board-head-links {
+  text-align: right;
+}
+
+.app-row {
+  display: grid;
+  grid-template-columns: 1fr 100px 140px;
   align-items: center;
-  gap: 1.5rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
+  gap: 1rem;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
+  animation: rowRise 0.4s ease both;
 }
 
-.app-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--gradient-end);
-  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.1);
+@keyframes rowRise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.app-card-icon {
-  font-size: 2.5rem;
-  color: var(--gradient-end);
+.app-row:last-child {
+  border-bottom: none;
+}
+
+.app-row:hover {
+  background-color: rgba(var(--accent-rgb), 0.06);
+  padding-left: 1.85rem;
+}
+
+.app-row-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.app-row-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.app-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.2);
+  animation: pulse 2s ease-in-out infinite;
   flex-shrink: 0;
 }
 
-.app-card-content {
-  flex-grow: 1;
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
-.app-card-content h3 {
-  font-size: 1.25rem;
-  color: var(--text-primary);
-  margin-bottom: 0.25rem;
+.app-row-links {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
 }
 
-.app-card-content p {
-  font-size: 0.9rem;
+.app-platform-link {
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  font-size: 0.95rem;
   color: var(--text-secondary);
+  transition: all 0.25s ease;
 }
 
-.app-card-view {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.app-platform-link:hover {
+  color: var(--text-dark);
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
 }
 
-.app-card:hover .app-card-view {
-  color: var(--gradient-end);
+@media (max-width: 600px) {
+  .liveapps-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  .liveapps-board-head {
+    display: none;
+  }
+  .app-row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'title links'
+      'status links';
+    row-gap: 0.5rem;
+  }
+  .app-row-title {
+    grid-area: title;
+  }
+  .app-row-status {
+    grid-area: status;
+  }
+  .app-row-links {
+    grid-area: links;
+    align-self: center;
+  }
 }

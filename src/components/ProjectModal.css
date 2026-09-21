@@ -6,7 +6,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+  background-color: rgba(6, 5, 9, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +20,8 @@
 .modal-content {
   background-color: var(--bg-secondary);
   padding: 2.5rem; /* Padding is now inside for the content */
-  border-radius: 15px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
   width: 90%;
   max-width: 700px;
   max-height: 85vh; /* Limit height for scrollability */
@@ -68,22 +71,32 @@
 }
 
 .modal-title {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: var(--gradient-end);
+  color: var(--text-primary);
   line-height: 1.2;
 }
 
 .modal-tag {
-  background-color: rgba(0, 170, 255, 0.2);
-  color: var(--gradient-end);
+  font-family: var(--mono);
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
   border-radius: 20px;
   padding: 0.4rem 0.9rem;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.modal-screenshot {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
   margin-bottom: 1.5rem;
 }
 
@@ -110,9 +123,22 @@
 }
 
 .modal-description-list {
-  list-style-type: '👉  ';
-  padding-left: 1.5rem;
+  list-style: none;
+  padding-left: 0;
   margin-bottom: 1rem;
+}
+
+.modal-description-list li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.modal-description-list li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  font-family: var(--mono);
+  color: var(--accent);
 }
 
 .modal-description-list li {
@@ -125,22 +151,21 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-  color: #fff;
+  background: var(--accent);
+  color: var(--text-dark);
   padding: 0.8rem 1.8rem;
-  border-radius: 8px;
+  border-radius: 4px;
   font-weight: 600;
   font-size: 1rem;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   border: none;
-  /* Add margin-top to separate button from description */
-  margin-top: 1.5rem; 
+  margin-top: 1.5rem;
 }
 
 .modal-view-images-btn:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-  box-shadow: 0 0 15px rgba(0, 170, 255, 0.4);
+  color: var(--text-dark);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent-dim);
 }
 
 /* Custom Scrollbar for Webkit browsers (Chrome, Safari) */

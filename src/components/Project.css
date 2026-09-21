@@ -1,107 +1,177 @@
 /* src/components/Project.css */
 
 .section-title {
-  text-align: left; /* Adjust if needed, but the example image shows it left-aligned */
+  text-align: left;
 }
 
 .section-subtitle {
   text-align: left;
 }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+.projects-list {
+  position: relative;
   margin-top: 3rem;
+  border-top: 1px solid var(--border-color);
 }
 
-.project-card {
-  height: 350px; /* Fixed height for consistent cards */
-  border-radius: 15px;
-  /* Gradients are applied inline in JS, so this is a fallback or for default */
-  background: var(--bg-card); 
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1.5rem;
-  color: #fff; /* Text color for gradient cards */
+.project-row {
   position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.15); /* Slightly darker overlay for text readability */
-    z-index: 1;
-}
-
-.project-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto auto;
   align-items: center;
-  margin-bottom: 1rem;
-  z-index: 2; /* Bring content above overlay */
-}
-
-.project-tag {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.view-project-btn {
-  background: none;
-  border: none;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 1.5rem;
+  gap: 1.5rem;
+  padding: 1.6rem 1rem;
+  border-bottom: 1px solid var(--border-color);
   cursor: pointer;
-  transition: color 0.3s ease;
-  z-index: 2; /* Bring content above overlay */
+  overflow: hidden;
+  transition: padding-left 0.25s ease, background-color 0.25s ease;
 }
 
-.view-project-btn:hover {
-  color: #fff;
+.project-row-accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
 }
 
-.card-content {
-  flex-grow: 1; /* Pushes content to the bottom */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end; /* Aligns content to bottom */
-  position: relative;
-  z-index: 2; /* Bring content above overlay */
+.project-row:hover {
+  padding-left: 1.5rem;
+  background-color: var(--bg-card);
 }
 
-.card-content h3 {
-  font-size: 2rem;
+.project-row:hover .project-row-accent {
+  transform: scaleY(1);
+}
+
+.project-row-index {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+}
+
+.project-row:hover .project-row-index {
+  transform: scale(1.35) rotate(-8deg);
+  color: var(--accent);
+  opacity: 1;
+}
+
+.project-row-body h3 {
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
   line-height: 1.2;
+  transition: color 0.25s ease;
+}
+
+.project-row:hover .project-row-body h3 {
+  color: var(--accent);
 }
 
 .project-technologies-brief {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-/* No need for slick-specific dots/arrows anymore */
+.project-tag {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.project-row:hover .project-tag {
+  transform: translateY(-3px) rotate(-2deg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Gradient preview chip that trails the cursor across the whole list —
+   a quick peek at the project's colors before you click in. */
+.project-preview-float {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 100px;
+  border-radius: 10px;
+  pointer-events: none;
+  z-index: 5;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.7rem;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transform: translate(-9999px, -9999px);
+  transition: opacity 0.2s ease, scale 0.2s ease;
+  scale: 0.9;
+}
+
+.project-preview-float.visible {
+  opacity: 1;
+  scale: 1;
+}
+
+.project-preview-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem 0.55rem;
+  border-radius: 4px;
+}
+
+@media (hover: none) {
+  .project-preview-float {
+    display: none;
+  }
+}
+
+.view-project-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.project-row:hover .view-project-btn {
+  color: var(--text-dark);
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: rotate(45deg);
+}
+
+@media (max-width: 640px) {
+  .project-row {
+    grid-template-columns: 1fr auto;
+    row-gap: 0.75rem;
+  }
+  .project-row-index {
+    display: none;
+  }
+  .project-tag {
+    display: none;
+  }
+}

@@ -1,11 +1,68 @@
 // src/components/Project.js
-import React, { useState } from 'react';
-import { FaArrowUpRightFromSquare, FaTimes } from 'react-icons/fa6'; // Using Fa6 for better icon options
+import React, { useRef, useState } from 'react';
+import { FaArrowUpRightFromSquare } from 'react-icons/fa6';
 import './Project.css';
 import ProjectModal from './ProjectModal'; // We'll create this next
 
 // Your projects data (keeping it here for context, ensure your actual data is complete)
 const projects = [
+  {
+    title: 'Two Souls',
+    tag: 'COUPLES APP',
+    gradient: 'linear-gradient(135deg, #ff6b9d, #c44569)',
+    technologies: ['Flutter', 'Node.js', 'Firebase', 'PostgreSQL'],
+    description: [
+      'Designed as an intimate, privacy-first sanctuary for couples in India with end-to-end encrypted messaging.',
+      'Implemented Signal Protocol (X3DH and Double Ratchet) for military-grade message encryption and privacy.',
+      'Built real-time push notifications using Firebase Cloud Messaging (FCM) for seamless communication.',
+      'Integrated location sharing, music sync, and timeline features for couples to experience moments together.',
+      'Added engagement stats and streaks system to encourage daily connection and intimacy.',
+      'Developed comprehensive subscription model with tiered feature access.',
+      'Redesigned full UI system for an intuitive, emotionally resonant user experience.',
+      'Ensured rigorous test coverage across all core features and encryption flows.',
+      'Conducted market research and positioning strategy for the Indian couples app space.',
+      'Built scalable backend architecture with real-time data sync and state management.',
+    ],
+    projectImagesLink: 'https://drive.google.com/drive/folders/1JsoLPBHjIddOgmgvm_KOsEX8mnTk418-?usp=sharing',
+  },
+  {
+    title: 'Fingo News',
+    tag: 'STOCK MARKET AI',
+    gradient: 'linear-gradient(135deg, #0f2027, #2c5364)',
+    technologies: ['Next.js', 'Node.js', 'PostgreSQL', 'Prisma', 'Claude/OpenAI/Gemini APIs', 'Redis/NodeCache'],
+    description: [
+      'Created a production-grade NSE (National Stock Exchange) filing scraper with near-continuous polling and webhook-triggered updates.',
+      'Implemented Next.js App Router with Incremental Static Regeneration (ISR) and on-demand revalidation for SEO optimization.',
+      'Built dynamic Open Graph image generation for rich social media previews and improved sharing.',
+      'Developed multi-provider AI support with intelligent fallback hierarchy (Claude → OpenAI → Gemini → OpenRouter).',
+      'Created encrypted API key management UI for secure integration with multiple AI providers.',
+      'Optimized stock screener with nightly precomputed technical indicators achieving sub-50ms response times.',
+      'Built background sync workers and intelligent caching using NodeCache for real-time data availability.',
+      'Developed content creation suite (Brand Story, Quote Post, Banner Generator, Canvas Post) with Canva-style UI.',
+      'Implemented comprehensive sitemap generation and crawl budget optimization for search engine visibility.',
+      'Built full-stack news platform with Fastify backend and React/Vite frontend for high-performance content delivery.',
+    ],
+    projectImagesLink: 'https://drive.google.com/drive/folders/1b5UDyS6_OJaXBg-Wc2sHAnTbzpXcHLcX?usp=sharing',
+  },
+  {
+    title: 'ManSetu',
+    tag: 'HEALTHTECH',
+    gradient: 'linear-gradient(135deg, #00b894, #079992)',
+    technologies: ['Full-stack Web & Mobile', 'Role-Based Access Control', 'Database Management'],
+    description: [
+      'Designed a comprehensive platform for wellbeing professionals (therapists, counselors, wellness coaches) to manage their practice.',
+      'Implemented role-based access control with distinct workflows for practitioners, clients, and administrative staff.',
+      'Built client management system for tracking sessions, progress notes, and therapeutic outcomes.',
+      'Created scheduling and appointment management features with automated reminders and calendar sync.',
+      'Developed billing and subscription management for practitioners to monetize their services.',
+      'Enabled secure client-practitioner communication channels with privacy compliance.',
+      'Built reporting and analytics dashboards for practitioners to track practice metrics and client outcomes.',
+      'Designed responsive UI for both web and mobile platforms for on-the-go practice management.',
+      'Implemented comprehensive data security and HIPAA-compliant infrastructure for sensitive health information.',
+      'Created intuitive onboarding workflows for practitioners to quickly set up their digital practice.',
+    ],
+    projectImagesLink: 'https://drive.google.com/drive/folders/1CAhW_Et8NAHQYUuWMV1uPJBsb3xCLEp4?usp=sharing',
+  },
   {
     title: 'No Bunk',
     tag: 'SCHOOL APP', // Added a tag for the card design
@@ -101,6 +158,8 @@ const projects = [
 
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [hoveredProject, setHoveredProject] = useState(null);
+  const previewRef = useRef(null);
 
   const openModal = (project) => {
     setSelectedProject(project);
@@ -112,41 +171,66 @@ function Projects() {
     document.body.style.overflow = 'unset'; // Re-enable scrolling
   };
 
+  // Move the floating preview chip by writing straight to the DOM instead of
+  // re-rendering on every mousemove — keeps it feeling snappy, not laggy.
+  const handleMouseMove = (e) => {
+    if (!previewRef.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    previewRef.current.style.transform = `translate(${x}px, ${y}px) translate(-50%, -115%)`;
+  };
+
   return (
     <>
+      <span className="section-eyebrow">Selected Work</span>
       <h2 className="section-title">My Projects</h2>
       <p className="section-subtitle">
         A collection of my work, showcasing my skills in development and design.
       </p>
 
-      <div className="projects-grid">
+      <div
+        className="projects-list"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={() => setHoveredProject(null)}
+      >
         {projects.map((project, index) => (
-          <div 
-            key={index} 
-            className="project-card" 
-            style={{ backgroundImage: project.gradient }} // Apply gradient here
-            onClick={() => openModal(project)} // Open modal on card click
+          <div
+            key={index}
+            className="project-row"
+            onClick={() => openModal(project)}
+            onMouseEnter={() => setHoveredProject(project)}
           >
-            <div className="card-header">
-              <span className="project-tag">{project.tag}</span>
-              <button 
-                className="view-project-btn" 
-                onClick={(e) => { 
-                  e.stopPropagation(); // Prevent modal from opening when clicking button
-                  openModal(project);
-                }}
-              >
-                <FaArrowUpRightFromSquare />
-              </button>
-            </div>
-            <div className="card-content">
+            <span className="project-row-index mono">{String(index + 1).padStart(2, '0')}</span>
+            <div className="project-row-body">
               <h3>{project.title}</h3>
               <p className="project-technologies-brief">
                 {project.technologies.join(' • ')}
               </p>
             </div>
+            <span className="project-tag">{project.tag}</span>
+            <button
+              className="view-project-btn"
+              aria-label={`View ${project.title}`}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent modal from opening twice
+                openModal(project);
+              }}
+            >
+              <FaArrowUpRightFromSquare />
+            </button>
+            <span className="project-row-accent" style={{ background: project.gradient }} />
           </div>
         ))}
+
+        <div
+          ref={previewRef}
+          className={`project-preview-float${hoveredProject ? ' visible' : ''}`}
+          style={{ background: hoveredProject?.gradient }}
+          aria-hidden="true"
+        >
+          <span className="project-preview-tag mono">{hoveredProject?.tag}</span>
+        </div>
       </div>
 
       {selectedProject && (

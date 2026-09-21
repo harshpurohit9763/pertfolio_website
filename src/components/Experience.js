@@ -7,7 +7,7 @@ const experiences = [
   {
     company: 'Dextra Labs PVT LTD',
     role: 'Associate Software Developer',
-    duration: 'Jan 2025 - Present', 
+    duration: 'Jan 2025 - Apr 2026', 
   },
   {
     company: 'Cloudy ML PVT LTD',
@@ -87,6 +87,7 @@ function Experience() {
 
   return (
     <>
+      <span className="section-eyebrow">Career</span>
       {/* --- MODIFIED HEADER --- */}
       <div className="experience-header-container">
         <h2 className="section-title">Work Experience</h2>
@@ -96,12 +97,15 @@ function Experience() {
 
       <p className="section-subtitle">My professional journey and roles.</p>
 
-      <div className="experience-grid">
+      <div className="experience-timeline">
         {experiences.map((exp, index) => (
-          <div key={index} className="experience-card">
-            <h3>{exp.company}</h3>
-            <p className="experience-role">{exp.role}</p>
-            <p className="experience-duration">{exp.duration}</p>
+          <div key={index} className="experience-row">
+            <span className="experience-marker" />
+            <span className="experience-duration mono">{exp.duration}</span>
+            <div className="experience-role-block">
+              <h3>{exp.company}</h3>
+              <p className="experience-role">{exp.role}</p>
+            </div>
           </div>
         ))}
       </div>
