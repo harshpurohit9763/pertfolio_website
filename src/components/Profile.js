@@ -4,11 +4,11 @@ import React from 'react';
 import { FaArrowDown } from 'react-icons/fa';
 import profileImage from '../assets/profile.png';
 import './Profile.css';
-import { ROLES } from '../data/profile';
+import { BUILD_ITEMS } from '../data/profile';
 import useTypewriter from '../hooks/useTypewriter';
 
 function Profile() {
-  const typedText = useTypewriter(ROLES);
+  const typedText = useTypewriter(BUILD_ITEMS);
 
   return (
     <div className="profile-section container">

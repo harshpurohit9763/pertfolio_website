@@ -2,11 +2,11 @@
 import React from 'react';
 import profileImage from '../../assets/profile.png';
 import styles from './ProfileMobile.module.css';
-import { ROLES } from '../../data/profile';
+import { BUILD_ITEMS } from '../../data/profile';
 import useTypewriter from '../../hooks/useTypewriter';
 
 function ProfileMobile() {
-  const typedText = useTypewriter(ROLES);
+  const typedText = useTypewriter(BUILD_ITEMS);
 
   return (
     <div className={styles.hero}>
